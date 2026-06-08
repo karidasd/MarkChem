@@ -23,7 +23,14 @@ Writing chemistry notes in standard word processors is a nightmare. General mark
 - 📊 **Periodic Table Integration**: Access an interactive periodic table to quickly lookup and insert atomic properties into your notes.
 - 🤖 **Chem AI Assistant**: A built-in AI assistant powered by Google Gemini (BYOK). Select a chemical reaction and ask the AI to balance it, explain it, or brainstorm synthesis pathways.
 - ⚡ **Lightning Fast**: Built on [Tauri](https://tauri.app/) and Rust. Uses a fraction of the RAM compared to Electron apps like MarkText or Obsidian.
-- 📄 **Export to Word/PDF**: Seamlessly export your beautifully rendered chemistry notes to `.docx` or `.pdf` for submission.
+- **Markdown First:** Write seamlessly in Markdown with real-time, live preview.
+- **Offline & Secure:** Runs entirely on your local machine with zero telemetry.
+- **Export Anywhere:** Export your notes directly to .md, Word (.docx), or PDF.
+
+---
+> **⭐ Support the Project**
+> If you find MarkChem useful for your studies, research, or work, please consider leaving a ⭐️ **Star** on this repository! It helps the project grow and reach more chemists!
+---
 
 ## 🚀 Installation
 
