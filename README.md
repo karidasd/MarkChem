@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/karidasd/MarkChem/main/assets/markchem-logo.png" alt="MarkChem Logo" width="200"/>
+  <img src="https://raw.githubusercontent.com/karidasd/MarkChem/main/public/logo.png" alt="MarkChem Logo" width="200"/>
   <h1>MarkChem</h1>
   <p><strong>A Modern, AI-Powered Chemistry Markdown Editor</strong></p>
   <br/>
