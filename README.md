@@ -1,7 +1,9 @@
 <div align="center">
-  <img src="public/logo.png" width="120" alt="MarkChem Logo" />
-  <h1>🧪 MarkChem</h1>
-  <p><strong>A specialized, lightning-fast Markdown Editor built exclusively for Chemists and Researchers.</strong></p>
+  <img src="https://raw.githubusercontent.com/karidasd/MarkChem/main/assets/markchem-logo.png" alt="MarkChem Logo" width="200"/>
+  <h1>MarkChem</h1>
+  <p><strong>A Modern, AI-Powered Chemistry Markdown Editor</strong></p>
+  <br/>
+  <img src="https://raw.githubusercontent.com/karidasd/MarkChem/main/assets/screenshot.png" alt="MarkChem Screenshot" width="800" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);"/>
 
   [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
   [![Tauri](https://img.shields.io/badge/Tauri-V2-orange.svg)](https://tauri.app/)
