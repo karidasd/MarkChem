@@ -27,7 +27,7 @@ Writing chemistry notes in standard word processors is a nightmare. General mark
 
 *Note: Pre-compiled installers for Windows (.exe), macOS (.dmg), and Linux (.AppImage) are automatically generated via GitHub Actions.*
 
-Go to the [Releases](https://github.com/YOUR_USERNAME/MarkChem/releases) page and download the installer for your operating system!
+Go to the [Releases](https://github.com/karidasd/MarkChem/releases) page and download the installer for your operating system!
 
 ## 💻 Development Setup
 
@@ -42,7 +42,7 @@ If you want to build MarkChem from source or contribute to the project:
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/MarkChem.git
+git clone https://github.com/karidasd/MarkChem.git
 cd MarkChem
 
 # Install dependencies (use legacy-peer-deps due to React 19 + JSME compatibility)
