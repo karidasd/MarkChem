@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+  
+  html, body {
+    @apply w-full h-full m-0 p-0 overflow-hidden font-sans transition-colors duration-200;
+  }
+  
+  #root {
+    @apply w-full h-full flex;
+  }
+}
+
+/* Base theme styles using custom tailwind classes */
+body.dark {
+  @apply bg-obsidian text-slate-light;
+}
+
+body {
+  @apply bg-slate-light text-slate-dark;
+}
+
+/* Perfect PDF Print Export Styles */
+@media print {
+  /* Hide UI elements */
+  .w-64.bg-slate-panels, 
+  .flex-1.h-full.font-mono {
+    display: none !important;
+  }
+  
+  /* Reset container for printing */
+  .preview-pane-container {
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    background: white !important;
+    color: black !important;
+  }
+  
+  /* Fix canvas (SMILES) and Math sizes */
+  canvas {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+  }
+  
+  .katex-block-wrapper, 
+  pre {
+    page-break-inside: avoid;
+  }
+}
+
+/* Focus Mode */
+.focus-mode-active .cm-line:not(.cm-activeLine) {
+  opacity: 0.3;
+  transition: opacity 0.3s ease;
+}
+.focus-mode-active .cm-activeLine {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
