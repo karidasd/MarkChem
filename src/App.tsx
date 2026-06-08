@@ -8,6 +8,7 @@ import { AIAssistantPane } from "./components/AIAssistantPane";
 import { writeTextFile, writeFile } from "@tauri-apps/plugin-fs";
 import { htmlToDocx } from "wp-html-to-docx";
 import { X } from "lucide-react";
+import { isTauri } from "@tauri-apps/api/core";
 
 const DEFAULT_CONTENT = `# MarkChem
 
@@ -132,7 +133,7 @@ function App() {
 
   const handleExportMd = async () => {
     try {
-      if (window.__TAURI_INTERNALS__) {
+      if (isTauri()) {
         const { save } = await import('@tauri-apps/plugin-dialog');
         const selected = await save({
           filters: [{ name: 'Markdown', extensions: ['md', 'markdown'] }],
@@ -180,7 +181,7 @@ function App() {
         title: 'MarkChem Document',
       });
       
-      if (window.__TAURI_INTERNALS__) {
+      if (isTauri()) {
         const { save } = await import('@tauri-apps/plugin-dialog');
         const savePath = await save({
           filters: [{ name: 'Word Document', extensions: ['docx'] }],

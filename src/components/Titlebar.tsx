@@ -2,10 +2,12 @@ import React from 'react';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import { Minus, Square, X } from 'lucide-react';
 
+import { isTauri } from '@tauri-apps/api/core';
+
 export function Titlebar() {
-  const minimize = () => { if (window.__TAURI_INTERNALS__) getCurrentWindow().minimize(); };
-  const toggleMaximize = () => { if (window.__TAURI_INTERNALS__) getCurrentWindow().toggleMaximize(); };
-  const close = () => { if (window.__TAURI_INTERNALS__) getCurrentWindow().close(); };
+  const minimize = () => { if (isTauri()) getCurrentWindow().minimize(); };
+  const toggleMaximize = () => { if (isTauri()) getCurrentWindow().toggleMaximize(); };
+  const close = () => { if (isTauri()) getCurrentWindow().close(); };
 
   return (
     <div 
