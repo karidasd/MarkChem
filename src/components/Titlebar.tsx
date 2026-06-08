@@ -3,9 +3,9 @@ import { getCurrentWindow } from '@tauri-apps/api/window';
 import { Minus, Square, X } from 'lucide-react';
 
 export function Titlebar() {
-  const minimize = () => getCurrentWindow().minimize();
-  const toggleMaximize = () => getCurrentWindow().toggleMaximize();
-  const close = () => getCurrentWindow().close();
+  const minimize = () => { if (window.__TAURI_INTERNALS__) getCurrentWindow().minimize(); };
+  const toggleMaximize = () => { if (window.__TAURI_INTERNALS__) getCurrentWindow().toggleMaximize(); };
+  const close = () => { if (window.__TAURI_INTERNALS__) getCurrentWindow().close(); };
 
   return (
     <div 
