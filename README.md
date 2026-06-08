@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/tauri-apps/tauri/HEAD/app-icon.png" width="120" alt="MarkChem Logo" />
+  <img src="public/logo.png" width="120" alt="MarkChem Logo" />
   <h1>🧪 MarkChem</h1>
   <p><strong>A specialized, lightning-fast Markdown Editor built exclusively for Chemists and Researchers.</strong></p>
 
