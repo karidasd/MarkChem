@@ -19,15 +19,17 @@ import { oneDark } from '@codemirror/theme-one-dark';
 import { syntaxHighlighting, defaultHighlightStyle, bracketMatching } from '@codemirror/language';
 import { autocompletion, CompletionContext } from '@codemirror/autocomplete';
 import type { ViewMode } from '../App';
-import { Columns, Maximize, Eye, Focus, Type, PencilRuler } from 'lucide-react';
+import { Columns, Maximize, Eye, Focus, Type, PencilRuler, FlaskConical } from 'lucide-react';
 import { PeriodicTableModal } from './PeriodicTableModal';
 import { MolecularDrawerModal } from './MolecularDrawerModal';
+import { PubChemModal } from './PubChemModal';
 
 // Compartments for dynamic reconfiguration
 const themeCompartment = new Compartment();
 const typewriterCompartment = new Compartment();
 const OPEN_PT_EFFECT = StateEffect.define<boolean>();
 const OPEN_DRAW_EFFECT = StateEffect.define<boolean>();
+const OPEN_PUBCHEM_EFFECT = StateEffect.define<boolean>();
 
 interface EditorPaneProps {
   value: string;
@@ -76,6 +78,17 @@ const slashCommandCompletions = (context: CompletionContext) => {
             effects: OPEN_DRAW_EFFECT.of(true)
           });
         }
+      },
+      { 
+        label: "/pubchem", 
+        type: "keyword", 
+        info: "Search PubChem Database", 
+        apply: (view: EditorView, completion: any, from: number, to: number) => {
+          view.dispatch({
+            changes: { from, to, insert: "" },
+            effects: OPEN_PUBCHEM_EFFECT.of(true)
+          });
+        }
       }
     ]
   };
@@ -88,6 +101,7 @@ export function EditorPane({ value, onChange, isDark, viewMode, setViewMode, scr
   const [isTypewriterMode, setIsTypewriterMode] = useState(false);
   const [isPtOpen, setIsPtOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isPubChemOpen, setIsPubChemOpen] = useState(false);
 
   useEffect(() => {
     if (!editorRef.current) return;
@@ -124,6 +138,9 @@ export function EditorPane({ value, onChange, isDark, viewMode, setViewMode, scr
           }
           if (update.transactions.some(tr => tr.effects.some(e => e.is(OPEN_DRAW_EFFECT)))) {
             setIsDrawerOpen(true);
+          }
+          if (update.transactions.some(tr => tr.effects.some(e => e.is(OPEN_PUBCHEM_EFFECT)))) {
+            setIsPubChemOpen(true);
           }
         }),
         EditorView.theme({
@@ -247,6 +264,12 @@ export function EditorPane({ value, onChange, isDark, viewMode, setViewMode, scr
     insertSnippet(block, block.length);
   };
 
+  const handleInsertPubChem = (data: any) => {
+    setIsPubChemOpen(false);
+    const text = `**${data.name}** (MW: ${data.MolecularWeight} g/mol, Formula: ${data.MolecularFormula})\n\n\`\`\`chem\n${data.IsomericSMILES}\n\`\`\`\n`;
+    insertSnippet(text, text.length);
+  };
+
   return (
     <div className={`flex-1 flex flex-col h-full overflow-hidden border-r border-slate-borderDark ${isFocusMode ? 'focus-mode-active' : ''}`}>
       <PeriodicTableModal 
@@ -258,6 +281,11 @@ export function EditorPane({ value, onChange, isDark, viewMode, setViewMode, scr
         isOpen={isDrawerOpen} 
         onClose={() => setIsDrawerOpen(false)} 
         onInsert={handleInsertMolecule} 
+      />
+      <PubChemModal
+        isOpen={isPubChemOpen}
+        onClose={() => setIsPubChemOpen(false)}
+        onInsert={handleInsertPubChem}
       />
       {/* Editor Toolbar */}
       <div className="flex items-center justify-between p-2 bg-slate-200 dark:bg-slate-panels border-b border-slate-borderDark shrink-0">
@@ -290,6 +318,14 @@ export function EditorPane({ value, onChange, isDark, viewMode, setViewMode, scr
           >
             <PencilRuler size={14} />
             Draw
+          </button>
+          <button
+            onClick={() => setIsPubChemOpen(true)}
+            className="flex items-center gap-1 px-3 py-1 text-xs font-semibold rounded bg-purple-500 text-white hover:bg-purple-400 transition-colors"
+            title="Search PubChem Database"
+          >
+            <FlaskConical size={14} />
+            Search
           </button>
         </div>
         

@@ -1,8 +1,23 @@
 import React, { useState } from 'react';
-import { FileText, Save, FolderOpen, Moon, Sun, Printer, Download, FolderGit2, FileType, Bot } from 'lucide-react';
+import { FileText, Save, FolderOpen, Moon, Sun, Printer, Download, FolderGit2, FileType, Bot, FilePlus } from 'lucide-react';
 import { open } from '@tauri-apps/plugin-dialog';
 import { readTextFile, readDir } from '@tauri-apps/plugin-fs';
 import type { DirEntry } from '@tauri-apps/plugin-fs';
+
+const TEMPLATES = [
+  {
+    name: 'Lab Report',
+    content: `# Lab Report: [Title]\n\n**Date:** \n**Name:** \n\n## Objective\n\n\n## Materials & Methods\n\n\n## Data & Results\n\n\n## Conclusion\n`
+  },
+  {
+    name: 'Reaction Notes',
+    content: `# Reaction: [Name]\n\n## Mechanism\n\n$$\n\\ce{}\n$$\n\n## Reagents\n- \n- \n\n## Notes\n`
+  },
+  {
+    name: 'Blank Molecule',
+    content: `\`\`\`chem\n\n\`\`\`\n`
+  }
+];
 
 interface SidebarProps {
   onFileOpen: (content: string, path: string) => void;
@@ -61,6 +76,11 @@ export function Sidebar({ onFileOpen, onFileSave, onExportMd, onExportDocx, onTo
 
   const handlePrint = () => {
     window.print();
+  };
+
+  const handleCreateTemplate = (template: typeof TEMPLATES[0]) => {
+    const tempName = `Untitled-${template.name.replace(/\\s+/g, '-')}.md`;
+    onFileOpen(template.content, tempName);
   };
 
   return (
@@ -136,6 +156,19 @@ export function Sidebar({ onFileOpen, onFileSave, onExportMd, onExportDocx, onTo
           })}
         </div>
       )}
+
+      <div className="uppercase tracking-wider font-semibold mb-4 mt-8 text-xs text-cyan-accent">Templates</div>
+
+      {TEMPLATES.map(template => (
+        <button
+          key={template.name}
+          onClick={() => handleCreateTemplate(template)}
+          className="flex items-center gap-2 w-full p-2 hover:bg-obsidian hover:text-slate-light rounded transition-colors mt-1 text-left"
+        >
+          <FilePlus size={16} className="text-cyan-accent opacity-70" />
+          <span>{template.name}</span>
+        </button>
+      ))}
 
       <div className="uppercase tracking-wider font-semibold mb-4 mt-8 text-xs">Export</div>
 
